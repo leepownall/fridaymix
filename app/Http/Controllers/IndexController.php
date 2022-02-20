@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function __invoke(Request $request): Response
     {
-        $playlists = Spotify::userPlaylists(config('where.start_time'))->get();
+        $playlists = Spotify::userPlaylists(config('where.spotify_username'))->get();
 
         $playlists = collect($playlists['items'])
             ->map(function ($playlist) {

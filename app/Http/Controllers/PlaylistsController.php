@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 use Spotify;
-use function config;
 
-class IndexController extends Controller
+class PlaylistsController extends Controller
 {
-    public function __invoke(Request $request): Response
+    public function index(): Response
     {
-        $playlists = Spotify::userPlaylists(config('where.spotify_username'))->get();
+        $playlists = Spotify::userPlaylists(Cache::get('username'))->get();
 
         $playlists = collect($playlists['items'])
             ->map(function ($playlist) {

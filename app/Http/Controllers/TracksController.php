@@ -6,19 +6,20 @@ use App\Track;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 use Spotify;
 use function config;
 
 
-class ShowController extends Controller
+class TracksController extends Controller
 {
-    public function __invoke(Request $request, string $playlist): Response
+    public function show(Request $request, string $playlist): Response
     {
         $tracks = Spotify::playlistTracks($playlist)->get();
 
-        $startTime = Carbon::parse(config('where.start_time'));
+        $startTime = Carbon::parse(Cache::get('startTime'));
 
         $tracks = collect($tracks['items'])
             ->mapInto(Track::class)

@@ -1,19 +1,11 @@
 <?php
 
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ShowController;
+use App\Http\Controllers\PlaylistsController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\TracksController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', IndexController::class)->name('playlists.index');
-Route::get('/show/{playlist}', ShowController::class)->name('playlists.show');
+Route::get('/', [PlaylistsController::class, 'index'])->name('playlists.index');
+Route::get('/show/{playlist}', [TracksController::class, 'show'])->name('playlists.show');
+Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');

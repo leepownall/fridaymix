@@ -31,7 +31,7 @@ class UpdateSettingsRequest extends FormRequest
             'startTime' => [
                 'required',
                 'string',
-            ]
+            ],
         ];
     }
 }

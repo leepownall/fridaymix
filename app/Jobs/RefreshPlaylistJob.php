@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Actions\CreatePlaylistAction;
 use App\Actions\UpdatePlaylistAction;
 use App\Models\Playlist;
 use Illuminate\Bus\Queueable;

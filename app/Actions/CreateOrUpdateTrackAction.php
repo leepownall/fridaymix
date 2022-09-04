@@ -5,18 +5,12 @@ namespace App\Actions;
 use App\Models\Track as TrackModel;
 use App\Models\User;
 use App\Track;
-use Illuminate\Support\Facades\Log;
 
 class CreateOrUpdateTrackAction
 {
     public function __invoke(Track $track, User $user): TrackModel
     {
         $trackModel = TrackModel::firstWhere('isrc', $track->isrc);
-
-        Log::info('yeet', [
-            'model' => $trackModel,
-            'track' => $track,
-        ]);
 
         if ($trackModel !== null) {
             $trackModel->update([

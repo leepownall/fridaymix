@@ -3,19 +3,18 @@
 namespace App\Actions;
 
 use App\Jobs\AddTrackToPlaylistJob;
-use App\Jobs\SyncTrackToPlaylistJob;
 use App\Models\Playlist;
 use App\Models\User;
 use App\Track;
 use Carbon\Carbon;
+use Illuminate\Bus\Batch;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Bus;
 use Spotify;
-use function resolve;
 
 class UpdatePlaylistAction
 {
-    public function __invoke(Playlist $playlistModel, string $startingAt): Playlist
+    public function __invoke(Playlist $playlistModel, string $startingAt): Batch
     {
         $playlist = Spotify::playlist($playlistModel->spotify_playlist_id)->get();
 
@@ -40,8 +39,6 @@ class UpdatePlaylistAction
             })
             ->toArray();
 
-        Bus::batch($createTracks)->name($playlist['name'])->dispatch();
-
-        return $playlistModel;
+        return Bus::batch($createTracks)->name($playlist['name'])->dispatch();
     }
 }

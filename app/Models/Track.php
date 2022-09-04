@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use function gmdate;
 
 class Track extends Model
 {
@@ -42,5 +43,10 @@ class Track extends Model
     public function playlists(): BelongsToMany
     {
         return $this->belongsToMany(Playlist::class);
+    }
+
+    public function getDurationAttribute(): string
+    {
+        return gmdate('i \m\i\n\u\t\e\s s \s\e\c\o\n\d\s', $this->duration_in_ms / 1000);
     }
 }

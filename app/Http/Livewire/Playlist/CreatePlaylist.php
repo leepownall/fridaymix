@@ -11,12 +11,15 @@ use App\Track;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Spotify;
 
 class CreatePlaylist extends Component
 {
-    public $playlistId;
+    public $playlistUrl;
+
+    public $playlistId = '';
 
     public $startingAt;
 
@@ -26,6 +29,11 @@ class CreatePlaylist extends Component
             ->next('friday')
             ->setTime(14, 00)
             ->toDateTimeLocalString('minute');
+    }
+
+    public function updatedPlaylistUrl()
+    {
+        $this->playlistId = Str::of($this->playlistUrl)->between('/playlist/', '?si=')->toString();
     }
 
     public function submit()
@@ -47,9 +55,9 @@ class CreatePlaylist extends Component
             ]
         );
 
-        $playlistModel = resolve(CreatePlaylistAction::class)($this->playlistId, $this->startingAt);
+        [$playlistModel, $batch] = resolve(CreatePlaylistAction::class)($this->playlistId, $this->startingAt);
 
-        return redirect()->route('playlists.show', ['playlist' => $playlistModel]);
+        return redirect()->route('playlists.show', ['playlist' => $playlistModel, 'batchId' => $batch->id]);
     }
 
     public function render()

@@ -26,7 +26,7 @@ class PlaylistsSeeder extends Seeder
         CreatePlaylistJob::dispatch('1ZrDQoW5mRGSrEfETakEjA', '2022-01-28 14:00:00');
         CreatePlaylistJob::dispatch('0TWMNycXgKCtJwLV5cvEfh', '2022-02-04 14:00:00');
         CreatePlaylistJob::dispatch('1YaMcWpx7OyMA3UG6lHMIM', '2022-02-11 14:00:00');
-        // Missing
+        CreatePlaylistJob::dispatch('6vftc2k63ked01qQLT5Whk', '2022-02-18 14:00:00');
         CreatePlaylistJob::dispatch('4J2AsRK4mVkTmOoEDxnZqD', '2022-03-04 14:00:00');
         CreatePlaylistJob::dispatch('0WmPNFz21cCdmLF6RTQW3q', '2022-03-11 14:00:00');
         CreatePlaylistJob::dispatch('6nvKZALHFTxRVoUnrhfc6p', '2022-03-18 14:00:00');
@@ -44,8 +44,14 @@ class PlaylistsSeeder extends Seeder
         CreatePlaylistJob::dispatch('0yLSxukkcdfKCk9IV2aicp', '2022-06-10 14:00:00');
         CreatePlaylistJob::dispatch('34bkcQo7Qu96YJAVQePT06', '2022-06-17 14:00:00');
         CreatePlaylistJob::dispatch('44ifrdqoHXI7vvEv51SAzb', '2022-06-24 14:00:00');
-        // Missing
+        CreatePlaylistJob::dispatch('3weWappIMuMvprT9Fesl6B', '2022-07-08 14:00:00');
+        CreatePlaylistJob::dispatch('0ETFQ7WSdZk6ViW67By4ec', '2022-07-15 14:00:00');
+        CreatePlaylistJob::dispatch('1gxkeqs8Yne2c2Z8ZTaqZO', '2022-07-22 14:00:00');
         CreatePlaylistJob::dispatch('6oJvlK3FUDbKPyttARaHce', '2022-07-29 14:00:00');
         CreatePlaylistJob::dispatch('7iu7XnacZPXqXIQAEvsIsl', '2022-08-05 14:00:00');
+        CreatePlaylistJob::dispatch('67qdfXO8tgKEGhC2OBGHNt', '2022-08-12 14:00:00');
+        CreatePlaylistJob::dispatch('6AHZtt4pDzJ1YUjG1uWAef', '2022-08-19 14:00:00');
+        CreatePlaylistJob::dispatch('40sdGAG2arN6r9btTjlkYM', '2022-08-26 14:00:00');
+        CreatePlaylistJob::dispatch('0Kp4clYRZR5LXKjMDkmeNQ', '2022-09-02 14:00:00');
     }
 }

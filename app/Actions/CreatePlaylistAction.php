@@ -14,7 +14,7 @@ use function resolve;
 
 class CreatePlaylistAction
 {
-    public function __invoke(string $playlistId, string $startingAt): Playlist
+    public function __invoke(string $playlistId, string $startingAt): array
     {
         $playlist = Spotify::playlist($playlistId)->get();
 
@@ -32,8 +32,6 @@ class CreatePlaylistAction
 
         $tracks = Spotify::playlistTracks($playlistId)->get();
 
-        // FRS710900410
-        // FRS710900410
         $createTracks = collect($tracks['items'])
             ->map(function ($track, $index) {
                 return new Track($track, $index + 1);
@@ -46,8 +44,6 @@ class CreatePlaylistAction
             })
             ->toArray();
 
-        Bus::batch($createTracks)->name($playlist['name'])->dispatch();
-
-        return $playlistModel;
+        return [$playlistModel, Bus::batch($createTracks)->name($playlist['name'])->dispatch()];
     }
 }

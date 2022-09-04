@@ -10,12 +10,12 @@
     for="{{ $for }}"
     {{ $attributes }}
 >
-    <span
-        @class([
-            'text-gray-700 inline-block mb-1',
-            'text-red-500' => $error
-        ])
-    >{{ $label ?? '' }}</span>
+        <span
+            @class([
+                'text-gray-700 inline-block mb-1',
+                'text-red-500' => $error
+            ])
+        >{{ $label ?? '' }}</span>
     <div class="mt-1">
         {{ $slot }}
     </div>

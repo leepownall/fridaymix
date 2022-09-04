@@ -2,10 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\ConvertMsToHuman;
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
-use function gmdate;
 
 class PlaylistTrackResource extends JsonResource
 {
@@ -17,6 +14,12 @@ class PlaylistTrackResource extends JsonResource
      */
     public function toArray($request)
     {
+        $playlists = $this
+            ->playlists
+            ->reject(function ($playlist) use ($request) {
+                return $this->pivot->playlist_id === $playlist?->id;
+            });
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -34,7 +37,7 @@ class PlaylistTrackResource extends JsonResource
             'ends_at_timestamp' => $this->pivot->ends_at->getTimestampMs(),
             'user_id' => $this->pivot->user->name,
             'added_by' => $this->pivot->user->name,
-            'related' => RelatedPlaylistResource::collection($this->playlists),
+            'related' => RelatedPlaylistResource::collection($playlists),
         ];
     }
 }

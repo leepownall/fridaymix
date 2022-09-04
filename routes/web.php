@@ -6,7 +6,7 @@ use App\Http\Controllers\Track;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
-Route::redirect('/', '/playlist');
+Route::redirect('/', '/playlists');
 
 Route::get('/login', function () {
     return Socialite::driver('spotify')->redirect();
@@ -20,7 +20,7 @@ Route::post('/logout', function () {
 
 Route::get('/auth/callback', Auth\HandleCallbackController::class);
 
-Route::prefix('playlist')->group(function () {
+Route::prefix('playlists')->group(function () {
     Route::get('/', Playlist\IndexController::class)->name('playlists.index');
     Route::get('/show/{playlist}', Playlist\ShowController::class)->name('playlists.show');
 
@@ -30,8 +30,3 @@ Route::prefix('playlist')->group(function () {
 });
 
 Route::get('tracks', Track\IndexController::class)->name('tracks.index');
-
-
-
-//Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
-//Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');

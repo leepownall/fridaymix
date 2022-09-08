@@ -30,3 +30,5 @@ Route::prefix('playlists')->group(function () {
 });
 
 Route::get('tracks', Track\IndexController::class)->name('tracks.index');
+
+Route::redirect('/show/{playlist}', '/playlists/show/{playlist}');

@@ -7,11 +7,11 @@ use Illuminate\Support\Arr;
 
 class Track
 {
+    public string $id;
+
     public Carbon $addedAt;
 
     public string $addedBy;
-
-    public string $id;
 
     public string $name;
 
@@ -21,20 +21,28 @@ class Track
 
     public int $durationInMs;
 
-    public string $readableDuration;
-
     public ?string $imageUrl;
 
-    public function __construct($data)
+    public int $position;
+
+    public string $isrc;
+
+    public function __construct($data, int $position)
     {
         $this->id = Arr::get($data, 'track.id');
         $this->name = Arr::get($data, 'track.name');
-        $this->addedBy =  Arr::get($data, 'added_by.id');
-        $this->addedAt = Carbon::parse(Arr::get($data, 'added_by.date'));
+        $this->addedBy = Arr::get($data, 'added_by.id');
+        $this->addedAt = Carbon::parse(Arr::get($data, 'added_at'));
         $this->album = Arr::get($data, 'track.album.name');
         $this->artists = collect(Arr::get($data, 'track.artists'))->pluck('name')->implode(', ');
         $this->durationInMs = Arr::get($data, 'track.duration_ms');
-        $this->readableDuration = Carbon::parse(Arr::get($data, 'track.duration_ms') / 1000)->format('i:s');
-        $this->imageUrl = head(Arr::get($data, 'track.album.images'))['url'];
+        $this->imageUrl = Arr::get($data, 'track.album.images.0.url');
+        $this->isrc = Arr::get($data, 'track.external_ids.isrc');
+        $this->position = $position;
+    }
+
+    public function toArray()
+    {
+        return get_object_vars($this);
     }
 }

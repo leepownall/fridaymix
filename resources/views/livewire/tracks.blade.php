@@ -37,24 +37,25 @@
                         </div>
                     </div>
                     <div x-show="expanded" class="py-4 px-8 grid grid-cols-12 gap-4 md: gap-2 border-t border-gray-200">
-                        <div class="col-span-6 md:col-span-4 flex flex-col">
+                        <div class="col-span-6 flex flex-col">
                             <span class="text-sm font-medium text-gray-500">First added by</span>
                             <p class="mt-1 text-sm text-gray-900">{{ $track->user->name }}</p>
                         </div>
 
-                        <div class="col-span-6 md:col-span-4 flex flex-col">
+                        <div class="col-span-6 flex flex-col">
                             <span class="text-sm font-medium text-gray-500">Appears on</span>
                             <ul>
                                 @foreach($track->playlists as $playlist)
                                     <li>
-                                        <a class="mt-1 text-sm text-gray-900 hover:text-blue-400" href="/playlists/show/{{ $playlist->spotify_playlist_id }}">{{ $playlist->name }}</a>
+                                        <a
+                                            class="mt-1 text-sm text-gray-900 hover:text-blue-400"
+                                            href="/playlists/show/{{ $playlist->spotify_playlist_id }}"
+                                        >
+                                            {{ $playlist->name }} ({{ $playlist->pivot->user->name }})
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
-                        </div>
-                        <div class="col-span-6 md:col-span-4 flex flex-col">
-                            <span class="text-sm font-medium text-gray-500">Duration</span>
-                            <p class="mt-1 text-sm text-gray-900">{{ $track->duration }}</p>
                         </div>
                     </div>
 

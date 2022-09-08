@@ -28,7 +28,7 @@ class Tracks extends Component
     {
         return view('livewire.tracks', [
             'tracks' => Track::query()
-                ->with('playlists')
+                ->with(['playlists', 'playlists.tracks'])
                 ->withCount('playlists')
                 ->when($this->search !== '' && $this->onlyDuplicates === false, function ($query) {
                     $query

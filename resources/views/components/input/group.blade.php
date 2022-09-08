@@ -3,6 +3,7 @@
     'for' => null,
     'help' => null,
     'error' => null,
+    'hideLabel' => false,
 ])
 
 <label
@@ -10,13 +11,15 @@
     for="{{ $for }}"
     {{ $attributes }}
 >
-        <span
-            @class([
-                'text-gray-700 inline-block mb-1',
-                'text-red-500' => $error
-            ])
-        >{{ $label ?? '' }}</span>
-    <div class="mt-1">
+        @if($hideLabel)
+            <span
+                @class([
+                    'text-gray-700 inline-block mb-1',
+                    'text-red-500' => $error
+                ])
+            >{{ $label ?? '' }}</span>
+        @endif
+    <div>
         {{ $slot }}
     </div>
     @if($help)

@@ -37,10 +37,10 @@
         @if($batchId === null)
             <div>
                 <div class="grid grid-cols-12 gap-y-2 sm:gap-x-4 w-full justify-between items-center px-4 sm:px-0">
-                    <x-input.group label="Search" class="col-span-full md:col-span-6">
+                    <x-input.group label="Search" class="col-span-full md:col-span-5">
                         <x-input.text wire:model.debounce="search" placeholder="By track name or album name" />
                     </x-input.group>
-                    <x-input.group for="added_by" label="Tracks added by" class="col-span-full md:col-span-3">
+                    <x-input.group for="added_by" label="Tracks added by" class="col-span-full md:col-span-4">
                         <x-input.select
                             id="added_by"
                             wire:model="addedBy"
@@ -50,23 +50,25 @@
                             default-label="All"
                         />
                     </x-input.group>
-                    <x-input.group for="only_upcoming" class="col-span-full md:col-span-3">
-                        <x-input.checkbox
-                            id="only_upcoming"
-                            wire:model="onlyUpcoming"
-                            label="Only upcoming"
-                            :disabled="!$isCurrentlyPlaying"
-                        />
-                    </x-input.group>
-                    @if($hasDuplicates)
-                        <x-input.group for="only_duplicates" class="col-span-full md:col-span-3">
+                    <div class="col-span-full md:col-span-3">
+                        <x-input.group for="only_upcoming">
                             <x-input.checkbox
-                                id="only_duplicates"
-                                wire:model="onlyDuplicates"
-                                label="Show only duplicates"
+                                id="only_upcoming"
+                                wire:model="onlyUpcoming"
+                                label="Only upcoming"
+                                :disabled="!$isCurrentlyPlaying"
                             />
                         </x-input.group>
-                    @endif
+                        @if($hasDuplicates)
+                            <x-input.group for="only_duplicates">
+                                <x-input.checkbox
+                                    id="only_duplicates"
+                                    wire:model="onlyDuplicates"
+                                    label="Only duplicates"
+                                />
+                            </x-input.group>
+                        @endif
+                    </div>
                 </div>
                 <div class="overflow-hidden sm:rounded-lg mt-8" >
                     <div>
@@ -152,10 +154,6 @@
                                         <div class="col-span-6 md:col-span-4 flex flex-col">
                                             <span class="text-sm font-medium text-gray-500">Added at</span>
                                             <p class="mt-1 text-sm text-gray-900" x-text="track.added_at"></p>
-                                        </div>
-                                        <div class="col-span-6 md:col-span-4 flex flex-col">
-                                            <span class="text-sm font-medium text-gray-500">Duration</span>
-                                            <p class="mt-1 text-sm text-gray-900" x-text="track.duration"></p>
                                         </div>
                                         <div x-data="{ related: track.related }" x-show="related.length > 0" class="col-span-6 md:col-span-4 flex flex-col">
                                             <span class="text-sm font-medium text-gray-500">Also appears on</span>

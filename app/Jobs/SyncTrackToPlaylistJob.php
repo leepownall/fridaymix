@@ -6,8 +6,6 @@ use App\Actions\CreateOrUpdateTrackAction;
 use App\Actions\CreateOrUpdateUserAction;
 use App\Models\Playlist;
 use App\Track;
-use App\Models\Track as TrackModel;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

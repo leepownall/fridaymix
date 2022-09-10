@@ -4,13 +4,11 @@ namespace App\Actions;
 
 use App\Jobs\AddTrackToPlaylistJob;
 use App\Models\Playlist;
-use App\Models\User;
 use App\Track;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Bus;
 use Spotify;
-use function resolve;
 
 class CreatePlaylistAction
 {
@@ -22,7 +20,7 @@ class CreatePlaylistAction
 
         $playlistModel = new Playlist([
             'name' => $playlist['name'],
-            'image_url' => Arr::get($playlist, 'images.0.url'),
+            'image_url' => Arr::get($playlist, 'images.2.url'),
             'external_url' => $playlist['external_urls']['spotify'],
             'spotify_playlist_id' => $playlistId,
             'starting_at' => Carbon::parse($startingAt),

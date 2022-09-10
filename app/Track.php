@@ -36,7 +36,7 @@ class Track
         $this->album = Arr::get($data, 'track.album.name');
         $this->artists = collect(Arr::get($data, 'track.artists'))->pluck('name')->implode(', ');
         $this->durationInMs = Arr::get($data, 'track.duration_ms');
-        $this->imageUrl = Arr::get($data, 'track.album.images.0.url');
+        $this->imageUrl = Arr::get($data, 'track.album.images.2.url');
         $this->isrc = Arr::get($data, 'track.external_ids.isrc');
         $this->position = $position;
     }

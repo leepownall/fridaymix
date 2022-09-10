@@ -22,7 +22,8 @@
                             <img class="inline-block h-14 w-14 rounded-md mr-4" src={{ $track->image_url }} alt="">
                             <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                                 <div class="flex-1 min-w-0">
-                                    <p class="font-medium text-indigo-600 truncate">{{ $track->name }}</p>
+                                    <p class="text-sm font-medium text-indigo-600 truncate">{{ $track->name }}</p>
+                                    <p class="text-sm font-medium text-gray-900 truncate">{{ $track->artists }}</p>
                                     <p class="text-sm text-gray-500 truncate">{{ $track->album }}</p>
                                 </div>
                             </div>

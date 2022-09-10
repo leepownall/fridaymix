@@ -17,6 +17,7 @@ class Tracks extends Component
         'search' => ['except' => ''],
         'addedBy' => ['except' => ''],
         'onlyUpcoming' => ['except' => false],
+        'onlyDuplicates' => ['except' => false],
     ];
 
     public $playlist;
@@ -99,7 +100,8 @@ class Tracks extends Component
                 }
 
                 return Str::contains($track->name, $this->search, true)
-                    || Str::contains($track->album, $this->search, true);
+                    || Str::contains($track->album, $this->search, true)
+                    || Str::contains($track->artists, $this->search, true);
             })
             ->filter(function (Track $track) {
                 if ($this->addedBy === '') {

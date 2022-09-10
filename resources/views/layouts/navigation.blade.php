@@ -31,57 +31,10 @@ Heroicon name: outline/x-mark" x-state:on="Menu open" x-state:off="Menu closed" 
                 </div>
             </div>
             <div class="flex items-center">
-                @auth()
-                    <div class="flex-shrink-0">
-                        <a href="{{ route('playlists.create') }}" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
-                            Add playlist
-                        </a>
-                    </div>
-                @endauth
-                <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-                    @auth()
-                        <div x-data="{ open: false }" @keydown.escape.stop="open = false; focusButton()" @click.away="open = false" class="ml-3 relative">
-                            <div>
-                                <button
-                                    type="button"
-                                    class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button"
-                                    x-ref="button"
-                                    @click="open = true"
-                                    @keyup.space.prevent="open = true"
-                                    aria-expanded="false"
-                                    aria-haspopup="true"
-                                    x-bind:aria-expanded="open.toString()"
-                                >
-                                    <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full" src="{{ $user->avatar }}" alt="{{ $user->name }} profile image.">
-                                </button>
-                            </div>
-
-                            <div
-                                x-show="open"
-                                x-trap="open"
-                                x-transition:enter="transition ease-out duration-100"
-                                x-transition:enter-start="transform opacity-0 scale-95"
-                                x-transition:enter-end="transform opacity-100 scale-100"
-                                x-transition:leave="transition ease-in duration-75"
-                                x-transition:leave-start="transform opacity-100 scale-100"
-                                x-transition:leave-end="transform opacity-0 scale-95"
-                                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                x-ref="menu-items"
-                                x-description="Dropdown menu, show/hide based on menu state."
-                                role="menu"
-                                aria-orientation="vertical"
-                                aria-labelledby="user-menu-button"
-                                tabindex="-1"
-                                style="display: none;"
-                            >
-                                <livewire:signout class="cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" />
-                            </div>
-
-                        </div>
-                    @else
-                        <a class="bg-[#1DB954] hover:bg-[#1ed760] rounded-lg text-white px-4 py-2 text-sm" href="{{ route('login') }}">Login with Spotify</a>
-                    @endauth
+                <div class="flex-shrink-0">
+                    <a href="{{ route('playlists.create') }}" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
+                        Add playlist
+                    </a>
                 </div>
             </div>
         </div>
@@ -92,26 +45,6 @@ Heroicon name: outline/x-mark" x-state:on="Menu open" x-state:off="Menu closed" 
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <x-responsive-nav-link href="{{ route('playlists.index') }}" :active="request()->routeIs('playlists.index', 'playlists.show')">Playlists</x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('tracks.index') }}" :active="request()->routeIs('tracks.index', 'tracks.show')">Tracks</x-responsive-nav-link>
-        </div>
-        <div class="pt-4 pb-3 border-t border-gray-700">
-            @auth()
-                <div class="flex items-center px-5 sm:px-6">
-                    <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="{{ auth()->user()->avatar }}" alt="">
-                    </div>
-                    <div class="ml-3">
-                        <div class="text-base font-medium text-white">{{ auth()->user()->name }}</div>
-                        <div class="text-sm font-medium text-gray-400">{{ auth()->user()->email }}</div>
-                    </div>
-                </div>
-                <div class="mt-3 px-2 space-y-1 sm:px-3">
-                    <livewire:signout class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700" />
-                </div>
-            @else
-                <div class="flex items-center px-5 sm:px-6">
-                    <a class="inline-block w-full text-center bg-[#1DB954] hover:bg-[#1ed760] rounded-lg text-white hover:underline px-4 py-2 text-sm" href="{{ route('login') }}">Login with Spotify</a>
-                </div>
-            @endauth
         </div>
     </div>
 </nav>

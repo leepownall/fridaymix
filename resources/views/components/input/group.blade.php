@@ -3,7 +3,7 @@
     'for' => null,
     'help' => null,
     'error' => null,
-    'hideLabel' => false,
+    'hideLabel',
 ])
 
 <label
@@ -11,7 +11,7 @@
     for="{{ $for }}"
     {{ $attributes }}
 >
-        @if($hideLabel)
+        @if(isset($hideLabel) === false)
             <span
                 @class([
                     'text-gray-700 inline-block mb-1',

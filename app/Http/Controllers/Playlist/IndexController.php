@@ -12,7 +12,7 @@ class IndexController extends Controller
     {
         $playlists = Playlist::query()
             ->latest('starting_at')
-            ->get();
+            ->simplePaginate(10);
 
         return view('playlists.index')->with('playlists', $playlists);
     }

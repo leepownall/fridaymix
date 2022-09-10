@@ -4,31 +4,29 @@
             <div class="flex justify-between items-center">
                 <h1>{{ $playlist->name }}</h1>
                 <div>
-                    @auth()
-                        <div>
-                            @if($batchId)
-                                <div
-                                    wire:key="update-{{ $batchId }}"
-                                    wire:poll="updateBatchProgress"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    {{ $batchProgress }}% updated
-                                </div>
-                            @endif
-                        </div>
-                        <div>
-                            @if($batchId === null)
-                                <button
-                                    wire:key="refresh-{{ $batchId }}"
-                                    wire:click="refreshPlaylist"
-                                    type="button"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    Refresh
-                                </button>
-                            @endif
-                        </div>
-                    @endauth
+                    <div>
+                        @if($batchId)
+                            <div
+                                wire:key="update-{{ $batchId }}"
+                                wire:poll="updateBatchProgress"
+                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                {{ $batchProgress }}% updated
+                            </div>
+                        @endif
+                    </div>
+                    <div>
+                        @if($batchId === null)
+                            <button
+                                wire:key="refresh-{{ $batchId }}"
+                                wire:click="refreshPlaylist"
+                                type="button"
+                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Refresh
+                            </button>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,7 +36,7 @@
             <div>
                 <div class="grid grid-cols-12 gap-y-2 sm:gap-x-4 w-full justify-between items-center px-4 sm:px-0">
                     <x-input.group label="Search" class="col-span-full md:col-span-5">
-                        <x-input.text wire:model.debounce="search" placeholder="By track name or album name" />
+                        <x-input.text wire:model.debounce="search" placeholder="By track, album or artist" />
                     </x-input.group>
                     <x-input.group for="added_by" label="Tracks added by" class="col-span-full md:col-span-4">
                         <x-input.select
@@ -50,8 +48,14 @@
                             default-label="All"
                         />
                     </x-input.group>
-                    <div class="col-span-full md:col-span-3">
-                        <x-input.group for="only_upcoming">
+                    <div
+                        @class([
+                            'col-span-full md:col-span-3 flex flex-col',
+                            'place-content-end h-full' => $hasDuplicates,
+                            'mt-4 md:mt-6 ' => !$hasDuplicates,
+                        ])
+                        class="col-span-full md:col-span-3 flex flex-col place-content-end h-full">
+                        <x-input.group for="only_upcoming" hide-label>
                             <x-input.checkbox
                                 id="only_upcoming"
                                 wire:model="onlyUpcoming"
@@ -60,7 +64,7 @@
                             />
                         </x-input.group>
                         @if($hasDuplicates)
-                            <x-input.group for="only_duplicates">
+                            <x-input.group for="only_duplicates" hide-label>
                                 <x-input.checkbox
                                     id="only_duplicates"
                                     wire:model="onlyDuplicates"
@@ -126,13 +130,13 @@
                                         >
                                         </span>
                                             </div>
-                                            <div
-                                                :class="track.is_current ? 'flex items-center space-x-4' : 'flex items-center space-x-4'">
+                                            <div :class="track.is_current ? 'flex items-center space-x-4' : 'flex items-center space-x-4'">
                                                 <div class="flex-shrink-0">
-                                                    <img class="h-12 w-12 rounded" :src="track.image_url" alt="" />
+                                                    <img class="h-14 w-14 rounded" :src="track.image_url" alt="" />
                                                 </div>
                                                 <div class="flex-1 min-w-0">
-                                                    <p class="text-sm font-medium text-gray-900 truncate" x-text="track.name"></p>
+                                                    <p class="text-sm font-medium text-indigo-600 truncate" x-text="track.name"></p>
+                                                    <p class="text-sm font-medium text-gray-900 truncate" x-text="track.artists"></p>
                                                     <p class="text-sm text-gray-500 truncate" x-text="track.album"></p>
                                                 </div>
                                             </div>

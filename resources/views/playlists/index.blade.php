@@ -25,5 +25,8 @@
                 @endforeach
             </ul>
         </div>
+       <div class="mt-4">
+           {{ $playlists->links() }}
+       </div>
     </div>
 </x-app-layout>

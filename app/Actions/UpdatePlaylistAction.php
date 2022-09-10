@@ -20,7 +20,7 @@ class UpdatePlaylistAction
 
         $playlistModel->update([
             'name' => $playlist['name'],
-            'image_url' => Arr::get($playlist, 'images.0.url'),
+            'image_url' => Arr::get($playlist, 'images.2.url'),
             'external_url' => $playlist['external_urls']['spotify'],
             'starting_at' => Carbon::parse($startingAt),
         ]);

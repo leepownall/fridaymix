@@ -25,18 +25,16 @@ class CreateOrUpdateTrackAction
             return $trackModel;
         }
 
-        return TrackModel::create(
-            [
-                'spotify_id' => $track->id,
-                'isrc' => $track->isrc,
-                'user_id' => $user->id,
-                'added_at' => $track->addedAt,
-                'name' => $track->name,
-                'artists' => $track->artists,
-                'album' => $track->album,
-                'duration_in_ms' => $track->durationInMs,
-                'image_url' => $track->imageUrl,
-            ]
-        );
+        return TrackModel::create([
+            'spotify_id' => $track->id,
+            'isrc' => $track->isrc,
+            'user_id' => $user->id,
+            'added_at' => $track->addedAt,
+            'name' => $track->name,
+            'artists' => $track->artists,
+            'album' => $track->album,
+            'duration_in_ms' => $track->durationInMs,
+            'image_url' => $track->imageUrl,
+        ]);
     }
 }

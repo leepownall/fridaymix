@@ -53,5 +53,6 @@ class PlaylistsSeeder extends Seeder
         CreatePlaylistJob::dispatch('6AHZtt4pDzJ1YUjG1uWAef', '2022-08-19 14:00:00');
         CreatePlaylistJob::dispatch('40sdGAG2arN6r9btTjlkYM', '2022-08-26 14:00:00');
         CreatePlaylistJob::dispatch('0Kp4clYRZR5LXKjMDkmeNQ', '2022-09-02 14:00:00');
+        CreatePlaylistJob::dispatch('5cKBKAhdwG5V0FLtKQYVbj', '2022-09-11 14:00:00');
     }
 }

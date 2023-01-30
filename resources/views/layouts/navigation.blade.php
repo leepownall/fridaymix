@@ -1,4 +1,3 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="bg-gray-800" x-data="{ open: false }">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -28,11 +27,20 @@ Heroicon name: outline/x-mark" x-state:on="Menu open" x-state:off="Menu closed" 
                 <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                     <x-nav-link href="{{ route('playlists.index') }}" :active="request()->routeIs('playlists.index', 'playlists.show')">Playlists</x-nav-link>
                     <x-nav-link href="{{ route('tracks.index') }}" :active="request()->routeIs('tracks.index', 'tracks.show')">Tracks</x-nav-link>
+                    @auth()
+                        <x-nav-link href="{{ route('profile.edit') }}" :active="request()->routeIs('profile.edit')">Profile</x-nav-link>
+                    @endauth
                 </div>
             </div>
             <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <a href="{{ route('playlists.create') }}" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
+                <div class="flex-shrink-0 space-x-4">
+                    @guest()
+                        <x-nav-link href="{{ route('login') }}">Login</x-nav-link>
+                        <x-nav-link href="{{ route('register') }}">Register</x-nav-link>
+                    @else
+                        <livewire:signout class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"/>
+                    @endguest
+                    <a href="{{ route('playlists.create') }}" class="relative inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500">
                         Add playlist
                     </a>
                 </div>

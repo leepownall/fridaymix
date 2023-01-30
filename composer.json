@@ -5,13 +5,15 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0|^8.1",
+        "php": "^8.2",
         "aerni/laravel-spotify": "^2.0",
+        "doctrine/dbal": "^3.5",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^9.0",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.10"
+        "livewire/livewire": "^2.10",
+        "wire-elements/modal": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory;
+    use Notifiable;
 
     public $fillable = [
         'name',
@@ -16,13 +17,9 @@ class User extends Authenticatable
         'avatar',
         'external_url',
         'spotify_id',
-        'spotify_token',
-        'spotify_refresh_token',
-    ];
-
-    protected $hidden = [
-        'spotify_token',
-        'spotify_refresh_token',
+        'password',
+        'email_verified_at',
+        'remember_token',
     ];
 
     public function tracks(): HasMany

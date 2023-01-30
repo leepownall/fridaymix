@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Playlist;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Track;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,10 @@ Route::prefix('playlists')->group(function () {
 
 Route::get('tracks', Track\IndexController::class)->name('tracks.index');
 
-Route::redirect('/show/{playlist}', '/playlists/show/{playlist}');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

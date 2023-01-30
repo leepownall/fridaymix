@@ -13,6 +13,8 @@ use Livewire\Component;
 
 class Tracks extends Component
 {
+    protected $listeners = ['refreshPlaylist' => 'refreshPlaylist'];
+
     protected $queryString = [
         'search' => ['except' => ''],
         'addedBy' => ['except' => ''],

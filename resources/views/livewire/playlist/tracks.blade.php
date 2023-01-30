@@ -17,6 +17,16 @@
                     </div>
                     <div>
                         @if($batchId === null)
+                            @auth()
+                                @if(Auth::user()->admin)
+                                    <button
+                                        type="button"
+                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-black hover:underline"
+                                        onclick='Livewire.emit("openModal", "edit-playlist-starting-at", {{ json_encode(["playlist" => $playlist->id]) }})'>
+                                        Edit Start Time
+                                    </button>
+                                @endif
+                            @endauth
                             <button
                                 wire:key="refresh-{{ $batchId }}"
                                 wire:click="refreshPlaylist"

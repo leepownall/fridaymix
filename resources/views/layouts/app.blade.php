@@ -12,6 +12,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <livewire:styles />
+        <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

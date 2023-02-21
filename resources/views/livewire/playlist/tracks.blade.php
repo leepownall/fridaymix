@@ -27,6 +27,12 @@
                                     </button>
                                 @endif
                             @endauth
+                                <a
+                                    href="{{ route('playlists.song-suggestion', $playlist) }}"
+                                    class="inline-flex items-center px-4 py-2 hover:underline"
+                                >
+                                    Get song suggestion
+                                </a>
                             <button
                                 wire:key="refresh-{{ $batchId }}"
                                 wire:click="refreshPlaylist"

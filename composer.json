@@ -8,9 +8,8 @@
         "php": "^8.2",
         "aerni/laravel-spotify": "^2.0",
         "doctrine/dbal": "^3.5",
-        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^10.0",
         "laravel/horizon": "^5.14",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.10",
@@ -23,9 +22,9 @@
         "laravel/breeze": "^1.11",
         "laravel/pint": "^1.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0",
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-ray": "^1.30"
     },
     "autoload": {
@@ -65,6 +64,6 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

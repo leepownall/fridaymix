@@ -15,7 +15,7 @@
                             </div>
                         @endif
                     </div>
-                    <div>
+                    <div class="flex flex-row space-x-4">
                         @if($batchId === null)
                             @auth()
                                 @if(Auth::user()->admin)
@@ -27,12 +27,7 @@
                                     </button>
                                 @endif
                             @endauth
-                                <a
-                                    href="{{ route('playlists.song-suggestion', $playlist) }}"
-                                    class="inline-flex items-center px-4 py-2 hover:underline"
-                                >
-                                    Get song suggestion
-                                </a>
+                            <livewire:song-suggestion :playlist="$playlist" />
                             <button
                                 wire:key="refresh-{{ $batchId }}"
                                 wire:click="refreshPlaylist"

@@ -26,6 +26,8 @@ class SongSuggestion extends Component
 
     public function getSuggestions()
     {
+        $this->answer = '';
+
         $result = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [

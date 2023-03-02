@@ -5,12 +5,13 @@ namespace App\Jobs;
 use App\Actions\UpdatePlaylistAction;
 use App\Models\Playlist;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class RefreshPlaylistJob implements ShouldQueue
+class RefreshPlaylistJob implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,6 +22,14 @@ class RefreshPlaylistJob implements ShouldQueue
      */
     public function __construct(public string $playlistId, public string $startingAt)
     {
+    }
+
+    /**
+     * The unique ID of the job.
+     */
+    public function uniqueId(): string
+    {
+        return $this->playlistId;
     }
 
     /**

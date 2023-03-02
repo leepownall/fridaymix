@@ -8,13 +8,14 @@ use App\Models\Playlist;
 use App\Track;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use function resolve;
 
-class SyncTrackToPlaylistJob implements ShouldQueue
+class SyncTrackToPlaylistJob implements ShouldQueue, ShouldBeUnique
 {
     use Batchable;
     use Dispatchable;
@@ -29,6 +30,14 @@ class SyncTrackToPlaylistJob implements ShouldQueue
      */
     public function __construct(public Playlist $playlist, public Track $track)
     {
+    }
+
+    /**
+     * The unique ID of the job.
+     */
+    public function uniqueId(): string
+    {
+        return $this->playlist->id;
     }
 
     /**

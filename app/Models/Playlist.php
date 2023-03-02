@@ -72,6 +72,6 @@ class Playlist extends Model
 
     public function getOpenAiPromptAttribute(): string
     {
-        return "Return one suggestion for songs about {$this->theme} but do not include {$this->songs_to_skip}";
+        return "Song suggestions about {$this->theme} but do not include {$this->songs_to_skip}. Suggest only one song.";
     }
 }

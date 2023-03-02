@@ -17,9 +17,9 @@ class PlaylistTrack extends Pivot
      */
     public $incrementing = true;
 
-    protected $dates = [
-        'starts_at',
-        'ends_at',
+    protected $casts = [
+        'starts_at' => 'datetime',
+        'ends_at' => 'datetime',
     ];
 
     public function playlist(): BelongsTo

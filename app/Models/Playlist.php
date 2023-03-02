@@ -21,8 +21,8 @@ class Playlist extends Model
         'starting_at',
     ];
 
-    protected $dates = [
-        'starting_at',
+    protected $casts = [
+        'starting_at' => 'datetime',
     ];
 
     public function getRouteKeyName(): string

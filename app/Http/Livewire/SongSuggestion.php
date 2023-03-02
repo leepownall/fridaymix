@@ -26,12 +26,14 @@ class SongSuggestion extends Component
 
     public function getSuggestions()
     {
-        $result = OpenAI::completions()->create([
-            'model' => 'text-davinci-003',
-            'prompt' => $this->prompt,
+        $result = OpenAI::chat()->create([
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'user', 'content' => $this->prompt],
+            ],
         ]);
 
-        $this->answer = $result['choices'][0]['text'];
+        $this->answer = $result['choices'][0]['message']['content'];
 
         $find = Spotify::searchTracks($this->answer)->limit(1)->get();
 

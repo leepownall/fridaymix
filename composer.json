@@ -23,8 +23,9 @@
         "laravel/breeze": "^1.11",
         "laravel/pint": "^1.1",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0",
+        "nunomaduro/collision": "^6.1",
+        "pestphp/pest": "^1.22",
+        "phpunit/phpunit": "^9.6",
         "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-ray": "^1.30"
     },
@@ -63,7 +64,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

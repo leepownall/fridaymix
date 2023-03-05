@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
+use function blank;
+use function preg_replace;
 
 class Playlist extends Model
 {
@@ -55,7 +57,23 @@ class Playlist extends Model
 
         $string = Str::of($this->name)->after('FM - ')->toString();
 
+        $hasDateAtStart = Str::of($this->name)->contains('FM - 2022');
+
+        if ($hasDateAtStart) {
+            $string = preg_replace('/FM - 2022-(\d\d)-(\d\d) - /', '', $this->name);
+        }
+
+        $startsWithWM = Str::of($this->name)->contains('WM -');
+
+        if ($startsWithWM) {
+            $string = Str::of($this->name)->after('WM -')->toString();
+        }
+
         preg_match($unicodeRegexp, $string, $matches);
+
+        if (blank($matches)) {
+            return $string;
+        }
 
         return Str::of($string)->before($matches[0])->trim()->toString();
     }

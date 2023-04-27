@@ -25,4 +25,8 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('time', function () {
+   echo now()->format('Y-m-d H:i:s');
+});
+
 require __DIR__.'/auth.php';
